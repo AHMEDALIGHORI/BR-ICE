@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="310" viewBox="0 0 1200 310" role="img" aria-labelledby="title desc">
+<title id="title">BR-ICE — A little scoop of extraordinary.</title>
+<desc id="desc">Cream and violet BR-ICE wordmark with a pink circular seal. An animated ice cream storefront, made for the scroll.</desc>
+<rect width="1200" height="310" rx="28" fill="#fff4e4"/>
+<path d="M860 0h340v310H860z" fill="#b0a1f1"/>
+<path d="M860 0v310" stroke="#1b1233" stroke-width="1"/>
+<g fill="#1b1233">
+<text x="45" y="43" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="3">THE BR-ICE WEB EXPERIENCE / VOL. 01</text>
+<text x="34" y="210" font-family="Arial Black,Arial,sans-serif" font-size="175" font-weight="900" letter-spacing="-13">BR-ICE</text>
+<text x="45" y="269" font-family="Georgia,serif" font-style="italic" font-size="27">A little scoop of extraordinary.</text>
+</g>
+<g transform="translate(1030 148) rotate(-12)">
+<circle r="112" fill="#f4a3be" stroke="#1b1233"/>
+<circle r="98" fill="none" stroke="#1b1233" stroke-dasharray="2 7"/>
+<path d="M0-70l5 15 16 1-13 10 4 16-12-9-13 9 4-16-12-10 16-1z" fill="#1b1233"/>
+<text text-anchor="middle" y="2" fill="#1b1233" font-family="Arial,sans-serif" font-size="22" font-weight="900">MADE FOR</text>
+<text text-anchor="middle" y="32" fill="#1b1233" font-family="Arial,sans-serif" font-size="22" font-weight="900">THE SCROLL.</text>
+<text text-anchor="middle" y="65" fill="#1b1233" font-family="Georgia,serif" font-style="italic" font-size="15">Go on. Take a spin.</text>
+</g>
+<text x="1030" y="284" text-anchor="middle" fill="#1b1233" font-family="Arial,sans-serif" font-size="10" letter-spacing="2">SIX FLAVOURS. ONE GOOD MOOD.</text>
+</svg>

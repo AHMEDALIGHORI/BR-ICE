@@ -1,0 +1,954 @@
+You are building a premium, sellable brand 
+website template: BR-ICE, a premium ice cream 
+made from real milk with zero added sugar, sold 
+to an international audience. Work as a senior 
+web designer and creative technologist. Build it 
+in phases, and stop and report at each 
+checkpoint rather than silently simplifying 
+anything, above all the scroll-scrubbed films and 
+the Three.js scenes.
+1. Concept
+Brand placeholder: BR-ICE. The page is loud, 
+colourful and Instagram-worthy, never childish: 
+every flavour owns a flat, saturated colour, and 
+each film floats on that colour so the page 
+background can shift to it with no visible edge. 
+Every product explodes: it starts whole and 
+centred, then breaks apart in slow motion as you 
+scroll (the cone cracks into shards, the scoop 
+splits into slices that show the dense real-milk 
+texture, the real ingredients burst out), and 
+scrolling back up puts it together again. The 
+story runs: the pint cracks open → the villain 
+(sugar) → the hero (real milk) → the feel 
+(texture) → six flavours blown apart → build your 
+own cone → spotted around the world → shop. 
+Tone of voice: confident, warm, a little cheeky 
+("Everything you love. Nothing you don't." / "Your 
+bag is empty. Bold of you.").
+No text or logos in any image or video. Every 
+word is HTML, so the brand can be renamed in 
+the markup without regenerating a single asset. 
+The asset prompts (second section of this pack) 
+follow the same rule.
+2. Stack
+Static site, no build step: index.html, css/
+style.css, js/main.js (classic script), js/three
+scenes.js (ES module), media/. GSAP 3.13
+ with 
+ScrollTrigger and SplitText (jsDelivr), Lenis 
+1.1.13 (unpkg), Three.js 0.170 through an import 
+map with three/addons/ (jsDelivr). Google Fonts: 
+Bricolage Grotesque (display, 800, tight negative 
+tracking), Instrument Serif italic (the emphasised 
+word in every headline) and DM Sans (body, 
+labels). No framework and no other libraries. It 
+must run from any static host (npx serve .).
+3. Asset pipeline (build this first)
+Write scripts/process.sh
+ (ffmpeg) that builds 
+media/ from the raw Google Flow downloads in 
+assets/, with a SRC table mapping media names 
+to file prefixes:
+Remove the generator's sparkle mark with 
+delogo (one box, measured once on the 
+1080p renders: x=1690 y=850 w=180 h=170).
+Scroll clips (media/scrub/&lt;name&gt;.mp4 
+and <name&gt;-m.mp
+4): the pint, the six 
+flavours and the sugar cube. 1280w CRF 25 
+and 720w CRF 27, H.264, no audio, faststart, 
+and keyint=2:min
+keyint=1:scenecut=0:bframes=0, so seeking 
+from scroll is instant.
+Loops (media/loop/&lt;name&gt;.mp4): milk 
+pour, scoop curl, floating scoops. 1280w, 
+CRF 26.
+Posters (media/poster/&lt;name&gt;.jpg and 
+<name&gt;-end.jpg): first and last frame of 
+every film; the end frames are the reduced
+motion state.
+Shop cards (media/img/
+&lt;flavour&gt;.webp): a square cut of each 
+cone's first frame. A share image from the 
+pint's last frame.
+Print each clip's background colour (a 40px 
+patch at the bottom-left of the first frame 
+averaged to one pixel) so the section colours 
+can be matched to the films.
+Keep media/ under about 55 MB.
+4. The scrub engine
+Fetch each scroll clip whole as a blob and 
+play it from an object URL so every seek is 
+local; prime it with play().then(pause) for 
+iOS. Serve the -m.mp
+4 files at 760px and 
+below.
+On the GSAP ticker, lerp a per-clip time 
+toward progress × (duration − 0.05
+) (factor 
+0.2) and set currentTime only when it moved 
+more than 8ms and the video is not seeking. 
+Only clips near the viewport are active.
+The pint gates the loader; the sugar cube 
+and the six flavours stream in behind it, in 
+page order.
+5. Page structure
+1.
+2.
+3.
+Loader — the BR-ICE wordmark, outlined, fills 
+from the bottom like a pint as the hero clip 
+loads, with a 000–100 counter and 
+messages "Churning real milk" → "Leaving 
+out the sugar" → "Cracking the pint". Fonts 
+and the pint clip gate it (capped at 5s); then it 
+slides up.
+Nav — a floating cream glass pill: wordmark, 
+links (Story, Flavours, Build, Moments, Shop) 
+that light up on the current section, a 
+currency select and a bag button with a 
+count. Hides going down, returns going up.
+Hero (pinned, 260%) — the pint film full-bleed. 
+A giant BR and ICE stand either side of the 
+pint, sized to the space beside it (measure 
+the pint's x-range in the film, map it through 
+object-fit: cover). Scrolling scrubs the pint 
+open; BR and ICE fly out sideways; a Three.js 
+sprinkle burst (an InstancedMesh of 
+capsules plus white droplets, deterministic 
+directions eased by the hero's progress, the 
+centre kept clear for the product) flies out of 
+the screen; then Instagram-style product tags 
+(white dot, dark pill with a pointer) pop onto 
+each ingredient — positioned in the film's 0–1 
+coordinates and mapped through cover so 
+they stay on the vanilla pod, the strawberry, 
+the monk fruit at any size. Finally the stage 
+shrinks to a rounded card (scale 0.74) and 
+4.
+"Everything you love. Nothing you don't." rises 
+beneath it with Shop pints / Build a cone.
+Marquee — a tilted ink band (Real milk ✦ 
+Zero added sugar ✦ Sweetened with monk 
+fruit ✦ Small batch ✦ Shipped frozen 
+worldwide) whose speed, direction and skew 
+5.
+6.
+7.
+follow scroll velocity.
+Ch 01, The villain (pinned) — the sugar-cube 
+film full-bleed on tangerine. "Ice cream was 
+never the problem." rises word by word; as 
+the cube shatters it leaves and "Sugar was." 
+lands in giant italic, letter by letter; then a 
+cream card: an added-sugar counter 
+scrubbed from 24 g down to 0 g and the 
+monk fruit + allulose line.
+Ch 02, The hero — sky blue. "It starts with real 
+milk.", copy, three counters (100% real milk & 
+cream, 48h slow-aged base, 24 → 0 g added 
+sugar); the milk-pour loop inside an arch that 
+reveals upward; then a wide pasture photo 
+that grows from a rounded inset with 
+parallax, captioned in italic.
+Ch 03, The feel (pinned) — the scoop-curl 
+loop opens from a rounded card in the middle 
+of an ink stage to full bleed; "Dense. Slow. 
+Ridiculously creamy." rises over a dark 
+8.
+9.
+gradient.
+Ch 04, Six flavours (pinned theatre) — "Six 
+flavours. Blown apart." in a mega headline, 
+then one pinned stage holding six layers, 
+each on its sampled colour: the flavour's film 
+sits right (76vw, edges feathered with 
+intersecting linear masks), the copy left (01 / 
+06
+, origin in italic, a two-line name, a note, 
+three fact pills, price and Add a pint). One 
+scrubbed timeline: each layer wipes up over 
+the last with a rounded top edge while the old 
+copy lifts away, then its film scrubs whole → 
+exploded. A cream rail at the bottom names 
+the current flavour. White text on the dark 
+colours (cobalt vanilla, teal caramel), ink on 
+the rest.
+Build a cone (Three.js) — a canvas beside a 
+cream panel. A procedural waffle cone (open 
+ConeGeometry with a canvas-drawn diamond 
+waffle as map and bump, a torus lip), scoops 
+10.
+from a displaced sphere (fbm value noise for 
+the churned surface, a ruffled lip at the base) 
+with a per-flavour canvas texture (bean 
+flecks, cocoa, mango streaks, pistachio bits, 
+strawberry ripple, caramel swirl), 
+RoomEnvironment lighting and neutral tone 
+mapping. Up to three scoops drop in with a 
+bounce and an elastic squash; sprinkles sit 
+on the top scoop; drag horizontally to spin 
+(pan-y stays for touch), arrow keys too; the 
+camera reframes as the stack grows; the 
+section colour follows the top scoop. The 
+panel lists the scoops, shows "0 g added 
+sugar" and a kcal sum, and "Snap it for the 
+gram" downloads a 1080×1350 PNG card 
+with the wordmark, the flavours and 
+#BRICEmoments. A strawberry scoop drops 
+in on first view to show how it works.
+#BRICEmoments (pinned, horizontal) — lilac; 
+the heading column stays as a solid band 
+while white polaroid cards (Tokyo, Paris, 
+New York, Mumbai, Lisbon, Amalfi Coast, 
+London)
+11.
+12.
+ slide under it, settling from a lift 
+and a tilt.
+Shop — "Pick your pints.", a free-shipping pill, 
+six cards on their flavour colours with the 
+cone cut, origin, price and a round add 
+button. Adding flies a dot of the flavour 
+colour to the bag. The bag is a drawer (focus 
+moved in and trapped, Esc closes, 
+quantities, subtotal, free-shipping nudge at 4 
+pints) saved per viewer. Currency USD / EUR 
+/ GBP / INR / JPY, defaulting from the 
+browser language, prices from one table.
+Footer — the floating-scoops loop full-bleed 
+on cream, "Get the scoop." and an email 
+form with inline validation, a giant BR-ICE 
+wordmark whose letters rise in and tilt on 
+hover, and an ink bar.
+6. Design language
+Ink #1b1233, cream #fff4e4, bubblegum 
+#ec9fad, sky #cfe8f5, lilac #b0a1f1; flavour 
+colours sampled from the films (vanilla 
+#2b66f0, chocolate #f6c739, mango 
+#b0a1f1, pistachio #f66e58, strawberry 
+#87d6bb, caramel #0c767e, sugar 
+#ee7830). All tokens as custom properties 
+at the top of style.css.
+Flavour data (name, origin, background, text 
+colour, scoop colour for the 3D builder, kcal, 
+note, facts) lives in one FLAVOURS array in 
+main.js; the theatre, shop cards and builder 
+chips are generated from it.
+Headlines rise through word or character 
+masks (SplitText); chapter eyebrows pair a 
+small uppercase label with an italic serif 
+name; pills and cards are fully rounded; a 
+small custom cursor grows over links and 
+reads "Drag" over the 3D canvas.
+Loops play only near the viewport 
+(IntersectionObserver) and pause outside it; 
+Three.js renders only while its canvas is on 
+screen.
+7. Quality bar
+Scrubs are smooth in both directions with no 
+black frames. The hero tags sit on their 
+ingredients at 1440×900, 1024×768 and on 
+phones.
+GSAP writes an inline translate: none on 
+anything it animates, so centring offsets for 
+animated elements go through xPercent / 
+yPercent, never CSS translate; hover effects 
+go on a child, never on an element GSAP 
+animates. The intro animates parent 
+elements only, so it can never fight the scroll 
+timelines.
+Phones (≤760px): the hero film is 62% of the 
+viewport height with feathered edges, BR 
+above and ICE below the pint, and it shrinks 
+as the pint bursts so the explosion fits; the 
+theatre stacks film above copy.
+prefers-reduced-motion: no smooth scroll, 
+no pins or scrubs, end-frame posters, every 
+section in its final readable state.
+No console errors; WebGL failure falls back 
+to a message, never a blank section.
+8. Template packaging
+One folder: index.html, css/, js/, media/, 
+scripts/process.sh
+, docs/ASSET
+PROMPTS.md
+, and assets/ for the raw 
+downloads (not shipped).
+A short README: how to run it, where to 
+change the copy, flavours, prices and 
+currencies, and how to swap in your own 
+renders.
+Working agreement
+Build the media pipeline, the scrub engine and 
+the hero (with the sprinkle burst and the tags) 
+first and show me the pint cracking open before 
+the rest of the page. Stop and ask before cutting 
+a section, swapping the blob-loaded clips for 
+streamed video, lowering the keyframe density 
+or dropping either Three.js scene.
+=== Google Flow Asset Generation Prompts ===
+BR-ICE — Google Flow Asset 
+Prompts
+Premium sugar-free ice cream made from real 
+milk, for an international audience. BR-ICE is the
+brand placeholder. Every word on the page is 
+HTML, so the brand can be renamed without 
+regenerating
+anything.
+The seven lifestyle photos in the 
+#BRICEmoments gallery and the pasture image 
+are not in this pack:
+they came from Higgsfield (Soul 2 and GPT 
+Image), prompts at the end of this file.
+Every image and film on the site, in generation 
+order: eleven stills and eight exploded end 
+frames
+with Nano Banana, then eleven films with Gemini 
+Omni Flash (or Veo 3.1
+frame
+clips the page scrubs through as you scroll. 
+Three are loops.
+). Eight are first-and-last
+The idea
+Every flavour owns a colour. Each flavour floats 
+on its own flat, saturated background, and the
+page background shifts to that colour as you 
+scroll into its section. That makes the page 
+colourful
+without looking busy, and each clip melts into 
+the page with no visible edge.
+Every product explodes. Each one starts whole 
+and centred, then breaks apart in slow motion as 
+you
+scroll: the cone cracks into shards, the scoop 
+splits into slices that show the dense real-milk 
+texture,
+and the flavour's real ingredients burst out 
+around it. Scrolling back up puts it together 
+again.
+Page flow: hero pint explodes → "Real milk" loop 
+→ six flavour explosions → "Zero sugar" sugar 
+cube
+explosion → texture loop → shop lineup → 
+floating-scoops footer.
+Global style block (paste at the end of 
+every prompt)
+Replace {BG} with the asset's background from 
+the palette table.
+Premium ice cream commercial, photorealistic, 
+shot on ARRI Alexa 65 with a 100mm macro 
+lens, bright
+high-key studio lighting: large soft key light from 
+the upper left, crisp white rim light, vivid
+saturated colour, glossy frozen texture with crisp 
+scoop ridges and visible fine ice-cream grain,
+firm and fully frozen with no melting and no 
+drips, subject floating in mid-air, no ground, no 
+table,
+no shadows on the background, seamless solid 
+{BG} background with no gradient and no 
+vignette,
+centred subject, generous negative space, no 
+hands, no people, no text, no logos, no lettering,
+no watermarks, 16:9, 4K.
+AI tends to print fake brand names on pints and 
+cups, so every packaging prompt asks for a plain,
+unprinted tub. It also likes to melt ice cream, 
+which is why the block says "fully frozen" twice 
+over.
+Palette
+The generator never hits a hex exactly. The page 
+colour of each section gets sampled from its 
+final
+film, so the hex codes are a direction, not a 
+contract.
+Asset
+Product
+Ice 
+cream 
+colour
+Backgrou
+nd {BG}
+Backgrou
+nd {BG}
+F01 Hero pint ivory 
+vanilla 
+bean
+bubblegu
+m pink 
+#FF8FBF
+F02 Madagas
+car 
+Vanilla 
+Bean
+ivory 
+with 
+black 
+bean 
+flecks
+cobalt 
+blue 
+#2D5BFF
+F03 Belgian 
+Dark 
+Chocolat
+e
+deep 
+glossy 
+cocoa 
+brown
+sunflowe
+r yellow 
+#FFD23F
+F04 Alphonso
+ Mango
+saturated
+ sunset 
+orange
+lilac 
+#B9A4FF
+F05 Sicilian 
+Pistachio
+soft 
+natural 
+pistachio 
+coral 
+#FF7A6B
+green
+F06 Strawberr
+y & 
+Cream
+pink with 
+red 
+strawberr
+y ripple
+mint 
+#7DE3C3
+F07 Salted 
+Caramel
+golden 
+caramel 
+with 
+amber 
+ribbon
+deep teal 
+#0F8A8A
+F08 Zero 
+sugar
+white 
+sugar 
+cube
+tangerine
+ 
+#FF8A3D
+L01 Real milk fresh 
+white 
+milk
+sky blue 
+#9FD3FF
+L02 Texture vanilla fills the 
+bean frame
+L03 Floating 
+scoops
+all six 
+flavours
+warm 
+cream 
+#FFF3E2
+Flow settings
+Asset Tool Settings
+Stills Nano Banana 16:9, 2K, 
+download at 
+full resolution
+Exploded 
+end frames
+Nano 
+Banana, 
+editing the 
+same chat as 
+its still, 16:9, 
+2K
+matching still
+Scrub films 
+⚙️
+Omni Flash 
+or Veo 3.1, 
+first + last 
+frame
+first = S0x 
+still, last = 
+E0x frame, 8 
+s, 16:9, 1080p
+Loops Omni Flash 
+or Veo 3.1
+8 s, 16:9, 
+1080p (L03 
+uses the 
+same still as 
+first and last 
+frame)
+⚙️
+ = scrubbed by scroll. These need a locked-off 
+camera, no cuts and constant lighting, or they 
+jitter
+when scrubbed. Each film starts on its whole 
+product (S still) and ends fully exploded (E 
+frame), so the
+model only fills in the motion between two 
+frames that already match.
+Draft cheap first. Run two or three low-resolution 
+drafts of each film, keep the one with the
+flattest background and smoothest motion, then 
+render that one at 1080p. Turn the audio off or 
+ignore
+it: the site strips sound from every film.
+Fix takes by asking. A near-miss take can be 
+fixed in the same thread ("keep everything, but 
+remove
+the lettering on the tub", "keep the camera 
+completely still", "the scoop must not melt") 
+instead of
+starting over.
+Watermarks. A visible sparkle in a first or last 
+frame gets copied into the film. Use a plan that
+exports without the mark, or clean the S and E 
+stills before using them as frames. The process 
+script
+removes the mark from the films (delogo), as on 
+the earlier sites.
+File naming
+Drop the downloads into assets/. The process 
+script finds each file by the start of its name, so 
+keep
+Flow's names or tell me which file is which.
+A. Stills (Nano Banana)
+The first eight are the first frames of the scrub 
+films in section C. S02 to S07 share one cone, 
+one
+scoop size and one camera angle, so the six 
+flavour sections line up as a set. Generate S02 
+first, then
+make S03 to S07 in the same chat with "same 
+cone, same framing, same light, only change the 
+flavour and
+background".--- S01 · still-pint-closed → img/pint
+closed.webp, first frame of F01
+A premium ice cream pint tub of matte pastel
+pink paperboard, plain and completely unprinted, 
+with a
+matching pink lid, a fine layer of frost on its 
+surface, tilted 15° towards the camera, 20° 
+above eye
+level, floating in mid-air, centred, filling the 
+middle 40% of the frame height.
+{BG} = bubblegum pink, slightly deeper than the 
+tub.--- S02 · still-vanilla → img/vanilla.webp, first 
+frame of F02
+One large, perfectly round scoop of Madagascar 
+vanilla bean ice cream, ivory with fine black 
+vanilla
+bean flecks and crisp scoop ridges, sitting in a 
+crisp golden-brown sugar waffle cone with a neat
+diamond waffle pattern, upright, front view 15° 
+above eye level, floating in mid-air, centred, the 
+cone
+and scoop filling the middle 45% of the frame 
+height.
+{BG} = cobalt blue.--- S03 · still-chocolate → img/chocolate.webp, 
+first frame of F03
+The same cone, scoop size and framing as S02, 
+with one scoop of Belgian dark chocolate ice 
+cream: deep
+glossy cocoa brown, dense and velvety, crisp 
+scoop ridges.
+{BG} = sunflower yellow.--- S04 · still-mango → img/mango.webp, first 
+frame of F04
+The same cone, scoop size and framing as S02, 
+with one scoop of Alphonso mango ice cream: 
+saturated
+sunset orange, smooth and creamy, crisp scoop 
+ridges.
+{BG} = lilac.--- S05 · still-pistachio → img/pistachio.webp, 
+first frame of F05
+The same cone, scoop size and framing as S02, 
+with one scoop of Sicilian pistachio ice cream: 
+soft
+natural pistachio green (not neon), tiny flecks of 
+crushed pistachio, crisp scoop ridges.
+{BG} = coral.--- S06 · still-strawberry → img/strawberry.webp, 
+first frame of F06
+The same cone, scoop size and framing as S02, 
+with one scoop of strawberry and cream ice 
+cream: soft
+pink with a visible ribbon of deep red strawberry 
+ripple and small real strawberry pieces, crisp 
+scoop
+ridges.
+{BG} = mint.--- S07 · still-caramel → img/caramel.webp, first 
+frame of F07
+The same cone, scoop size and framing as S02, 
+with one scoop of salted caramel ice cream: 
+warm golden
+caramel colour with a glossy amber caramel 
+ribbon swirled through it, crisp scoop ridges.
+{BG} = deep teal.--- S08 · still-sugar-cube → img/sugar
+cube.webp, first frame of F08
+A single sparkling white sugar cube with sharp 
+edges and visible sugar crystals, tilted 20° so 
+three
+faces show, floating in mid-air, centred, small in 
+the frame (about 20% of the frame height), macro
+detail on the crystals.
+{BG} = tangerine.--- S09 · still-lineup → img/lineup.webp (shop 
+section, share image)
+Six premium ice cream pint tubs in a neat 
+horizontal row, plain and completely unprinted, 
+each a
+different pastel colour matching a flavour (ivory, 
+cocoa brown, mango orange, pistachio green,
+strawberry pink, caramel gold), lids on, a light 
+frost on each, front view at eye level, evenly 
+spaced,
+standing on nothing, soft shadow-free light.
+{BG} = warm cream.--- S10 · still-milk → img/milk.webp (real-milk 
+section)
+A classic clear glass milk bottle, unlabelled, full 
+of fresh white milk with a thin cream line at the
+top, condensation beads on the glass, a crown
+shaped splash of milk frozen mid-air beside it, 
+front
+view, centred.
+{BG} = sky blue.--- S11 · still-floating-scoops → img/
+floating.webp, first and last frame of L03
+Six single scoops of ice cream floating in mid-air 
+in a loose, playful arc, no cones: vanilla bean,
+dark chocolate, Alphonso mango, pistachio, 
+strawberry ripple and salted caramel, each 
+slightly rotated,
+all the same size, evenly spaced, with clear 
+space in the centre of the frame for a headline.
+{BG} = warm cream.
+B. Exploded end frames (Nano 
+Banana, edit the matching still)
+Open the chat that made the still, attach the still 
+if Flow asks, and paste the prompt. Each must 
+keep
+the exact background, light and camera of its 
+still. Everything must stay inside the frame with a
+clean margin, because a part that leaves the 
+frame pops in and out when scrubbed.
+Opening line for every E frame (paste first):
+Edit this exact image. Keep the same 
+background colour, the same lighting, the same 
+camera angle and
+the same centre point. Show the same product 
+frozen at the peak of a slow-motion exploded 
+view, like
+a premium product teardown: every part 
+separated by clean gaps and suspended 
+weightlessly around the
+centre, arranged in a balanced, roughly 
+symmetrical burst that fills about 80% of the 
+frame, with
+nothing touching or crossing the frame edges. 
+Still fully frozen, no melting, no drips.
+Then add the line for that frame:--- E01 · end-pint → last frame of F01
+The lid has lifted straight up and floats above, 
+slightly tilted. The tub has split into four curved
+paperboard panels drifting outward. The block 
+of vanilla bean ice cream inside rises in the 
+centre and
+splits into three thick horizontal slabs with gaps 
+between them, showing a dense, creamy interior.
+Around it, a ring of fresh milk splashes and 
+droplets, and a few ingredients from every 
+flavour drift
+outward: a split vanilla pod, a dark chocolate 
+shard, a cube of mango, two pistachios, a halved
+strawberry, a glossy caramel shard and a halved 
+monk fruit.--- E02 · end-vanilla → last frame of F02
+The waffle cone has cracked into six to eight 
+large clean shards spreading outward and down. 
+The scoop
+has split into three thick horizontal slices lifted 
+apart, the cut faces showing ivory ice cream 
+packed
+with black vanilla bean flecks. Around it: split 
+vanilla pods, a pale vanilla orchid flower, ribbons
+and droplets of fresh white milk, and two halves 
+of a monk fruit.--- E03 · end-chocolate → last frame of F03
+The cone has cracked into large clean shards 
+spreading outward and down. The scoop has 
+split into three
+thick slices lifted apart, the cut faces dense, dark 
+and velvety. Around it: snapped squares and 
+shards
+of dark chocolate, a halved cocoa pod showing 
+its beans, scattered cocoa nibs, a soft puff of 
+cocoa
+powder and droplets of fresh milk.--- E04 · end-mango → last frame of F04
+The cone has cracked into large clean shards 
+spreading outward and down. The scoop has 
+split into three
+thick slices lifted apart, the cut faces a smooth 
+saturated orange. Around it: juicy Alphonso 
+mango
+cubes, a sliced mango cheek, two glossy green 
+mango leaves and droplets of fresh milk.--- E05 · end-pistachio → last frame of F05
+The cone has cracked into large clean shards 
+spreading outward and down. The scoop has 
+split into three
+thick slices lifted apart, the cut faces soft green 
+flecked with crushed pistachio. Around it: whole
+pistachios in their shells, cracked-open shells, 
+bright green shelled kernels, a fine dusting of 
+crushed
+pistachio and droplets of fresh milk.--- E06 · end-strawberry → last frame of F06
+The cone has cracked into large clean shards 
+spreading outward and down. The scoop has 
+split into three
+thick slices lifted apart, the cut faces pink with a 
+deep red strawberry ripple. Around it: whole and
+halved fresh strawberries with green leaves, thin 
+strawberry slices and ribbons of fresh cream.--- E07 · end-caramel → last frame of F07
+The cone has cracked into large clean shards 
+spreading outward and down. The scoop has 
+split into three
+thick slices lifted apart, the cut faces golden 
+with an amber caramel swirl. Around it: glossy 
+ribbons
+of caramel frozen mid-air, glass-like shards of 
+amber caramel, sparkling white sea salt flakes 
+and
+droplets of fresh milk.
+--- E08 · end-sugar-cube → last frame of F08
+The sugar cube has shattered and dissolved into 
+a fine cloud of glittering sugar crystals drifting
+outward towards the edges, thinning out as it 
+spreads. In the centre, where the cube was, 
+floats a
+single whole round monk fruit (luo han guo) and 
+one halved monk fruit showing its pale interior.
+C. Scrub films (Omni Flash or Veo 3.1
+, 
+first + last frame) 
+⚙️
+First frame = the S still, last frame = the E frame. 
+Paste the shared motion prompt, fill in the
+blanks, then the global style block.
+Shared motion prompt:
+Locked-off camera: no camera movement, no 
+zoom, no cuts, constant lighting, and the 
+background stays
+the exact same solid colour with no flicker for 
+the whole clip. 0 to 1.5
+ s: the {PRODUCT} floats
+perfectly still in the centre, turning less than 5°. 
+1.5
+ to 6 s: it bursts apart in smooth, graceful
+slow motion, {EXPLOSION}. 6 to 8 s: every piece 
+slows down and hangs suspended, ending 
+exactly on the
+last frame. Weightless, physical, satisfying 
+motion, like a premium product teardown. The 
+ice cream
+stays firm and fully frozen the whole time, no 
+melting, no drips.--- F01 · film-pint (hero)
+{PRODUCT} = pink ice cream pint.
+{EXPLOSION} = the lid pops off and rises, the tub 
+peels open into four curved panels that drift
+outward, the vanilla bean ice cream inside rises 
+and splits into three slabs, and a ring of fresh 
+milk
+splashes out while ingredients from every 
+flavour fly gently outward from behind it.--- F02 · film-vanilla
+{PRODUCT} = vanilla bean ice cream cone.
+{EXPLOSION} = the waffle cone cracks into large 
+shards that drift outward and down, the scoop 
+slices
+into three layers that lift apart, and vanilla pods, 
+a vanilla orchid, fresh milk droplets and halved
+monk fruit burst out from the centre.--- F03 · film-chocolate
+{PRODUCT} = dark chocolate ice cream cone.
+{EXPLOSION} = the cone cracks into large 
+shards that drift outward and down, the scoop 
+slices into
+three layers that lift apart, and dark chocolate 
+shards, a halved cocoa pod, cocoa nibs, a puff of 
+cocoa
+powder and milk droplets burst out from the 
+centre.--- F04 · film-mango
+{PRODUCT} = Alphonso mango ice cream cone.
+{EXPLOSION} = the cone cracks into large 
+shards that drift outward and down, the scoop 
+slices into
+three layers that lift apart, and mango cubes, a 
+mango cheek, mango leaves and milk droplets 
+burst out
+from the centre.--- F05 · film-pistachio
+{PRODUCT} = pistachio ice cream cone.
+{EXPLOSION} = the cone cracks into large 
+shards that drift outward and down, the scoop 
+slices into
+three layers that lift apart, and pistachios in their 
+shells, green kernels, crushed pistachio dust and
+milk droplets burst out from the centre.--- F06 · film-strawberry
+{PRODUCT} = strawberry and cream ice cream 
+cone.
+{EXPLOSION} = the cone cracks into large 
+shards that drift outward and down, the scoop 
+slices into
+three layers that lift apart, and fresh 
+strawberries, strawberry slices, leaves and 
+ribbons of cream
+burst out from the centre.--- F07 · film-caramel
+{PRODUCT} = salted caramel ice cream cone.
+{EXPLOSION} = the cone cracks into large 
+shards that drift outward and down, the scoop 
+slices into
+three layers that lift apart, and ribbons of 
+caramel stretch through the air while amber 
+caramel
+shards, sea salt flakes and milk droplets burst 
+out from the centre.--- F08 · film-sugar-cube (zero sugar)
+{PRODUCT} = white sugar cube.
+{EXPLOSION} = the cube cracks and dissolves 
+into a glittering cloud of sugar crystals that drifts 
+out
+towards the edges and thins away, revealing a 
+whole monk fruit and a halved monk fruit 
+floating in the
+centre.
+D. Loops (Omni Flash or Veo 3.1
+)
+--- L01 · loop-milk (real-milk section), text to video
+Extreme slow motion at 1000 fps: a smooth 
+stream of fresh white milk pours down from the 
+top of the
+frame into the centre, where it folds and swirls 
+into a perfect spiral of soft-serve ice cream, while
+small crowns of milk splash and droplets hang 
+in the air around it. Locked-off camera, constant
+lighting, seamless loop with the pour continuing 
+at the start and end, no container, no cone.
+Then the global style block with {BG} = sky blue 
+(drop "no drips" for this one).--- L02 · loop-scoop-curl (texture section), text to 
+video
+Extreme macro close-up, the frame filled edge to 
+edge with a tub of vanilla bean ice cream: a 
+polished
+steel ice cream scoop glides slowly across the 
+surface from left to right, curling up a thick, 
+perfect
+ribbon of ice cream with crisp ridges and visible 
+bean flecks, a light frost glittering on the
+surface. Slow, smooth, satisfying, ASMR-like. 
+Camera tracks very slowly alongside, constant 
+lighting.
+Then the global style block, but replace "subject 
+floating in mid-air … no vignette, centred subject,
+generous negative space" with "shallow depth of 
+field, the ice cream fills the frame".--- L03 · loop-floating (footer), first + last frame = 
+S11
+The six scoops of ice cream bob gently up and 
+down and turn slowly in place, each at its own 
+pace, as
+if floating in zero gravity, then settle back exactly 
+to where they started. Locked-off camera, no
+cuts, constant lighting, the background stays the 
+same solid colour, the scoops stay fully frozen.
+Then the global style block with {BG} = warm 
+cream.
+Picking takes: checklist
+ No lettering, logos or fake labels anywhere 
+(pints, cones, bottle).
+ The background stays one flat colour from 
+the first frame to the last, with no gradient or 
+flicker.
+ Camera is completely still in every 
+ film.
+ The ice cream never melts, sags or drips 
+(L01 aside).
+ No hands, spoons or people appear (L02's 
+scoop aside).
+⚙️
+ Nothing leaves the frame during the 
+explosion.
+ The last 1.5
+ to 2 s of each 
+⚙️
+ film holds still 
+on the exploded frame.
+ S02 to S07 match each other: same cone, 
+same scoop size, same height in the frame.
+E. Lifestyle photos (Higgsfield)
+Soul 2 for the seven gallery shots (3:4), GPT 
+Image for the pasture (16:9). Convert to WebP at 
+720w
+(media/img/social/&lt;city&gt;.webp) and 1600w 
+(media/img/pasture.webp).
+tokyo: Candid Instagram street
+ photo in 
+Tokyo: a stylish young Japanese woman in a 
+pastel lilac oversized jacket holding up a 
+pink strawberry ripple ice cream in a golden 
+waffle cone, laughing, standing against a flat 
+mint-green wall, bright direct flash, vivid 
+saturated colours, shot on 35mm film, no 
+text, no logos
+paris: Candid Instagram photo on a sunny 
+Paris street
+: a young Black man in a crisp 
+white shirt leaning on a vintage bicycle, 
+taking a bite of a dark chocolate ice cream in 
+a waffle cone, sunflower-yellow shopfront 
+shutters behind him, warm afternoon sun, 
+vivid colour, editorial street style, no text, no 
+logos
+newyork: Two friends sitting on a New York 
+brownstone stoop on a summer day sharing 
+ice cream cones, one pistachio green scoop 
+and one mango orange scoop in waffle 
+cones, colourful outfits in coral and cobalt, 
+joyful candid moment, golden hour light, 
+vivid saturated Instagram look, no text, no 
+logos
+mumbai: Young Indian woman in a bright 
+saffron-orange kurta at Marine Drive
+Mumbai seafront at sunset holding a mango 
+ice cream in a waffle cone towards the 
+camera, sea and pink-orange sky behind her, 
+warm glow, candid joyful smile, vivid 
+saturated Instagram photo, no text, no logos
+lisbon: POV photo of a hand with neat pastel 
+nails holding up a vanilla bean ice cream in a 
+golden waffle cone against a wall of cobalt 
+blue and white Portuguese azulejo tiles in 
+Lisbon, bright sunlight, crisp shadows, vivid 
+colour, Instagram aesthetic, no text, no logos
+coast: Stylish couple in their thirties on a pier 
+by a turquoise sea on a bright summer day, 
+each holding a salted caramel ice cream in a 
+waffle cone, wind in their hair, laughing, 
+Mediterranean light, vivid saturated teal and 
+gold tones, candid Instagram photo, no text, 
+no logos
+picnic: Top-down flat lay on a coral and pink 
+striped picnic blanket in a park: three plain 
+unbranded pastel ice cream pint tubs in pink, 
+mint and yellow with their lids off showing 
+scoopable ice cream, two wooden spoons, 
+fresh strawberries, pistachios and a vanilla 
+pod scattered around, dappled sunlight, vivid 
+Instagram aesthetic, no text, no logos, no 
+labels
+pasture: Photorealistic wide landscape of a 
+lush green alpine pasture at early morning 
+golden hour, a few healthy brown and white 
+dairy cows grazing on wildflower meadow, 
+soft mist in the valley, snowy mountains in 
+the distance, clear pastel sky, fresh and 
+clean, premium dairy brand photography, no 
+text, no logos, no people

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>BR-ICE — Everything you love. Nothing you don't.</title>
+ <meta name="description" content="Real milk. Zero added sugar. Six ridiculously creamy flavours. Meet BR-ICE and build your own cone.">
+ <meta name="theme-color" content="#e973a7"><meta property="og:title" content="BR-ICE — Break the ordinary."><meta property="og:image" content="media/img/share.webp">
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ec9fad'/%3E%3Ctext x='8' y='45' font-size='38' font-family='sans-serif' font-weight='900' fill='%231b1233'%3EBR%3C/text%3E%3C/svg%3E">
+ <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="css/style.css">
+ <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+ <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+ <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+ <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+ <script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+ <script defer src="js/main.js"></script>
+</head>
+<body>
+ <a class="skip-link" href="#story">Skip to the story</a>
+ <div class="loader" id="loader" aria-label="Loading BR-ICE">
+  <div class="loader-top"><span>GOOD THINGS TAKE A LITTLE CHURNING.</span><span>EST. FOR THE GOOD STUFF</span></div>
+  <div class="loader-word" aria-hidden="true">BR-ICE<span id="loader-fill">BR-ICE</span></div>
+  <div class="loader-bottom"><span id="loader-message" role="status">Churning real milk</span><span id="loader-count">000</span></div>
+ </div>
+ <header class="nav-wrap" id="nav-wrap"><nav class="nav" aria-label="Main navigation">
+  <a class="wordmark" href="#top" aria-label="BR-ICE home">BR-ICE<span>®</span></a>
+  <div class="nav-links"><a href="#story">Story</a><a href="#flavours">Flavours</a><a href="#build">Build</a><a href="#moments">Moments</a><a href="#shop">Shop</a></div>
+  <div class="nav-actions"><label class="sr-only" for="currency">Currency</label><select id="currency"><option>USD</option><option>EUR</option><option>GBP</option><option>INR</option><option>JPY</option></select><button class="bag-button" id="bag-open" aria-haspopup="dialog" aria-controls="bag">Bag <span id="bag-count">0</span></button></div>
+ </nav></header>
+ <main>
+ <section class="hero" id="top" aria-label="BR-ICE. Real milk ice cream with zero added sugar.">
+  <div class="hero-stage" id="hero-stage">
+   <div class="hero-film" id="hero-film"><img class="video-poster" id="hero-poster" src="media/poster/pint.jpg" alt="An unprinted pink pint of ice cream floating in the air"><video id="hero-video" class="scrub-video" muted playsinline preload="none" aria-hidden="true"></video>
+    <div class="ingredient-tag tag-left" data-x="0.22" data-y="0.35"><span class="tag-dot"></span><span class="tag-pill">Real vanilla bean ↗</span></div>
+    <div class="ingredient-tag tag-left" data-x="0.88" data-y="0.44"><span class="tag-dot"></span><span class="tag-pill">Actual strawberries ↗</span></div>
+    <div class="ingredient-tag tag-left" data-x="0.85" data-y="0.73"><span class="tag-dot"></span><span class="tag-pill">Sweet little monk fruit ↗</span></div>
+   </div>
+   <canvas id="burst-canvas" aria-hidden="true"></canvas>
+   <div class="hero-intro"><p class="eyebrow hero-eyebrow">REAL MILK. ZERO ADDED SUGAR. ALL THE GOOD STUFF.</p></div>
+   <h1 class="hero-word" aria-label="BR-ICE"><span class="hero-br" aria-hidden="true">BR</span><span class="hero-ice" aria-hidden="true">ICE</span></h1>
+   <div class="hero-bottom"><span class="hero-edition">SMALL BATCH.<br>BIG MAIN-CHARACTER ENERGY.</span><div class="scroll-cue"><span>SCROLL TO CRACK IT OPEN</span><span class="scroll-arrow">↓</span></div><span class="hero-seal">100%<br><small>real milk & cream</small></span></div>
+  </div>
+  <div class="hero-outro"><p class="eyebrow">A LITTLE LESS SUGAR. A LOT MORE LIFE.</p><h2>Everything you <em>love.</em><br>Nothing you don't.</h2><div class="button-row"><a class="button" href="#shop"><span>Shop pints ↗</span></a><a class="button button-outline" href="#build"><span>Build a cone ↗</span></a></div></div>
+ </section>
+ <div class="marquee" aria-label="Real milk. Zero added sugar. Sweetened with monk fruit. Small batch. Shipped frozen worldwide."><div class="marquee-track" aria-hidden="true"><span>Real milk ✦ Zero added sugar ✦ Sweetened with monk fruit ✦ Small batch ✦ Shipped frozen worldwide ✦ </span><span>Real milk ✦ Zero added sugar ✦ Sweetened with monk fruit ✦ Small batch ✦ Shipped frozen worldwide ✦ </span></div></div>
+ <div id="chapters">
+ <section id="story" class="villain chapter" aria-labelledby="villain-title">
+  <div class="villain-media"><img src="media/poster/sugar-cube.jpg" data-end="media/poster/sugar-cube-end.jpg" alt="A sugar cube breaking apart to reveal monk fruit"><video id="sugar-video" class="scrub-video" muted playsinline preload="none" aria-hidden="true"></video></div>
+  <p class="chapter-label"><span>CH. 01 / THE VILLAIN</span><em>A sweet little plot twist</em></p>
+  <h2 id="villain-title" class="villain-first">Ice cream was<br>never the <em>problem.</em></h2><p class="villain-second"><em>Sugar was.</em></p>
+  <div class="sugar-card"><span class="eyebrow">ADDED SUGAR</span><strong><span id="sugar-count">24</span><small> g</small></strong><p>Sweetened with monk fruit + allulose.<br>All the sweet. A little less baggage.</p></div>
+ </section>
+ <section id="milk" class="milk chapter" aria-labelledby="milk-title">
+  <p class="chapter-label"><span>CH. 02 / THE HERO</span><em>Back to the good stuff</em></p>
+  <div class="milk-grid"><div class="milk-copy"><h2 id="milk-title" data-reveal>It starts<br>with real <em>milk.</em></h2><p>Not a workaround. Not a compromise.<br>Just real milk, real cream, and the patience to make something ridiculously good.</p><p>We slow-age our base, then churn it into the kind of creamy you close your eyes for. Your spoon will understand.</p><div class="milk-facts"><div><strong><span data-count="100">100</span><small>%</small></strong><span>real milk & cream</span></div><div><strong><span data-count="48">48</span><small>h</small></strong><span>slow-aged base</span></div><div><strong><span class="old-number">24</span> → <span data-count="0" data-start="24">0</span><small>g</small></strong><span>added sugar</span></div></div></div>
+  <div class="milk-arch loop-media"><img src="media/poster/milk.jpg" data-end="media/poster/milk-end.jpg" alt="Fresh milk pouring into a creamy swirl"><video data-loop="milk" muted loop playsinline preload="none" aria-hidden="true"></video><span class="media-note">JUST THE REAL THING.</span></div></div>
+  <figure class="pasture"><div class="pasture-frame"><img src="media/img/pasture.webp" alt="Dairy cows grazing in a green alpine meadow at sunrise" loading="lazy"></div><figcaption><span>GOOD ICE CREAM STARTS LONG BEFORE THE SCOOP.</span><em>From a slower kind of morning.</em></figcaption></figure>
+ </section>
+ <section id="feel" class="feel chapter" aria-labelledby="feel-title"><p class="chapter-label"><span>CH. 03 / THE FEEL</span><em>Go on. Take your time.</em></p><div class="feel-film loop-media"><img src="media/poster/scoop-curl.jpg" data-end="media/poster/scoop-curl-end.jpg" alt="A metal scoop curling dense vanilla-bean ice cream"><video data-loop="scoop-curl" muted loop playsinline preload="none" aria-hidden="true"></video></div><div class="feel-shade"></div><h2 id="feel-title">Dense. Slow.<br>Ridiculously <em>creamy.</em></h2><p class="feel-note">THE KIND OF TEXTURE THAT DESERVES A MOMENT.</p></section>
+ <section id="flavours" class="flavours-intro"><p class="chapter-label"><span>CH. 04 / THE LINEUP</span><em>Pick your personality</em></p><h2 data-reveal>Six flavours.<br>Blown <em>apart.</em></h2><p>Real ingredients. Big feelings. Zero added sugar.</p><span class="section-arrow" aria-hidden="true">↓</span></section>
+ <section id="theatre" class="theatre" aria-label="Explore six ice cream flavours"><div id="flavour-layers"></div><nav class="flavour-rail" id="flavour-rail" aria-label="Select a flavour"></nav></section>
+ <section id="build" class="build chapter" aria-labelledby="build-title"><p class="chapter-label"><span>CH. 05 / YOUR CREATION</span><em>A little scoop of you</em></p><div class="build-heading"><h2 id="build-title" data-reveal>Your cone.<br>Your <em>rules.</em></h2><p>One, two, three scoops.<br>A very delicious personality test.</p></div><div class="builder-grid"><div class="cone-stage"><canvas id="cone-canvas" tabindex="0" role="img" aria-label="Interactive ice cream cone. Drag or use left and right arrow keys to rotate."></canvas><span class="drag-label">↔ DRAG TO GIVE IT A SPIN</span><div class="cone-caption"><span>HAND-BUILT BY YOU.</span><em>Excellent taste, by the way.</em></div></div><div class="builder-panel"><div class="panel-top"><span class="eyebrow">MAKE IT YOURS</span><span id="scoop-count">0 / 3 scoops</span></div><h3>What's your <em>flavour?</em></h3><div id="builder-chips" class="builder-chips"></div><div class="stack-label"><span class="eyebrow">YOUR STACK, BOTTOM TO TOP</span><button id="clear-cone" class="text-button">Start fresh ↺</button></div><ol id="scoop-list" aria-live="polite"></ol><label class="sprinkles-toggle"><span>Make it rain sprinkles <span aria-hidden="true">✦</span></span><input id="sprinkles" type="checkbox" checked><span class="switch" aria-hidden="true"></span></label><div class="cone-nutrition"><div><strong>0 g</strong><span>added sugar</span></div><div><strong id="cone-kcal">0</strong><span>kcal in your stack*</span></div></div><button id="snap-cone" class="button"><span>Snap it for the gram ↗</span></button><p class="builder-fine">*Illustrative nutrition for this template. A real brand should replace these values before launch.</p><p id="builder-status" class="sr-only" aria-live="polite"></p></div></div></section>
+ <section id="moments" class="moments" aria-labelledby="moments-title"><div class="moments-heading"><p class="eyebrow">CH. 06 / THE GOOD TIMES</p><h2 id="moments-title">Good taste.<br>Great <em>company.</em></h2><p>Different cities.<br>Same little moment of joy.</p><span class="moments-hashtag">#BRICEmoments</span><span class="moments-arrow" aria-hidden="true">→</span></div><div class="moments-track" id="moments-track"></div></section>
+ <section id="shop" class="shop chapter" aria-labelledby="shop-title"><p class="chapter-label"><span>CH. 07 / YOUR FREEZER CALLED</span><em>It wants an upgrade</em></p><div class="shop-heading"><h2 id="shop-title" data-reveal>Pick your <em>pints.</em></h2><span class="shipping-pill">✦ FREE SHIPPING ON 4+ PINTS</span></div><div class="shop-grid" id="shop-grid"></div><div class="shop-footnote"><span>REAL MILK. ZERO ADDED SUGAR. HAPPY SPOONS.</span><span>Frozen delivery details are configurable for your store.</span></div></section>
+ <footer id="footer"><div class="footer-scene loop-media"><img src="media/poster/floating.jpg" data-end="media/poster/floating-end.jpg" alt="Six flavours of ice cream floating in an arc"><video data-loop="floating" muted loop playsinline preload="none" aria-hidden="true"></video></div><div class="newsletter"><p class="eyebrow">A LITTLE SOMETHING FOR YOUR INBOX</p><h2 data-reveal>Get the <em>scoop.</em></h2><p>New flavours. Sweet little updates. The good stuff.</p><form id="newsletter-form" novalidate><label class="sr-only" for="email">Email address</label><input id="email" name="email" type="email" placeholder="Your email address" autocomplete="email" required aria-describedby="email-message"><button type="submit" aria-label="Join the newsletter">↗</button></form><p id="email-message" aria-live="polite"></p></div><a class="footer-word" href="#top" aria-label="BR-ICE back to top"><span>B</span><span>R</span><span>-</span><span>I</span><span>C</span><span>E</span></a><div class="footer-bar"><span>© <span id="year">2026</span> BR-ICE</span><span>EVERYTHING YOU LOVE. NOTHING YOU DON'T.</span><a href="#top">BACK TO TOP ↑</a></div></footer>
+ </div>
+ </main>
+ <dialog id="bag" class="bag" aria-labelledby="bag-title"><div class="bag-header"><div><span class="eyebrow">GOOD TASTE, GREAT CHOICE</span><h2 id="bag-title">Your <em>bag.</em></h2></div><button id="bag-close" aria-label="Close bag">×</button></div><div class="bag-shipping" id="bag-shipping"></div><div id="bag-items" class="bag-items"></div><div class="bag-bottom"><div class="subtotal"><span>Subtotal</span><strong id="subtotal"></strong></div><p>Taxes and shipping calculated by your connected store.</p><button id="checkout" class="button"><span>Checkout ↗</span></button><p id="checkout-message" role="status"></p><button id="keep-shopping" class="text-button">Keep the good stuff coming</button></div></dialog>
+ <div class="cursor" id="cursor" aria-hidden="true"></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+ <noscript><div class="noscript">This interactive template needs JavaScript for scrolling films and the cone builder. The pink pint poster remains available above.</div></noscript>
+ <script type="module" src="js/three-scenes.js"></script>
+</body></html>

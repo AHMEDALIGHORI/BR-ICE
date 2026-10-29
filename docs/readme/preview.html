@@ -1,0 +1,250 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="../../"><link rel="icon" type="image/svg+xml" href="docs/readme/wordmark.svg"><title>BR-ICE — Project README</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#eee9e2;color:#231b31;font:16px/1.75 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1040px;margin:40px auto;padding:48px;background:#fffefb;border:1px solid #e3dbd3;border-radius:20px;box-shadow:0 18px 65px #25152c08}img{max-width:100%;height:auto;border-radius:12px}h2{font-size:29px;line-height:1.3;letter-spacing:-1px;margin-top:52px;border-bottom:1px solid #e9e2d9;padding-bottom:14px}h3{font-size:23px;line-height:1.4;letter-spacing:-.6px}a{color:#6145a4;text-underline-offset:4px}p{margin:18px 0}sub{font-size:12px;color:#6c6475;vertical-align:baseline}table{width:100%;border-collapse:collapse;display:block;overflow:auto;margin:24px 0;font-size:14px}td,th{padding:14px 16px;border:1px solid #e5ded6;vertical-align:top}th{background:#f2ecfc;text-align:left}td:first-child{min-width:160px}tr:nth-child(even){background:#fcf8f1}code{background:#f1ebf8;padding:3px 6px;border-radius:5px;font-size:.85em}pre{padding:24px;background:#211830;color:#fff3e5;overflow:auto;border-radius:12px;line-height:1.65}pre code{background:none;padding:0;font-size:13px}details{margin:16px 0;border:1px solid #e5ded6;border-radius:12px;padding:16px 20px}summary{cursor:pointer;color:#4f397b}li{margin:9px 0}hr{border:0;border-top:1px solid #e5ded6;margin:34px 0}#preview-note{text-align:center;color:#716779;font-size:12px;margin-bottom:28px}@media(max-width:640px){body{font-size:15px}main{margin:0;border:0;border-radius:0;padding:24px 18px}h2{font-size:25px}h3{font-size:20px}td,th{padding:10px}td:first-child{min-width:110px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style></head><body><main><p id="preview-note">PROJECT README · <a href="README.md">Markdown source</a> · <a href="index.html">Open website</a></p><div align="center">
+<p><img src="docs/readme/wordmark.svg" alt="BR-ICE — A little scoop of extraordinary. Made for the scroll." width="100%"></p>
+<h3 id="big-type-real-texture-a-very-good-reason-to-keep-scrolling">Big type. Real texture. A very good reason to keep scrolling.</h3>
+<p>A premium ice-cream storefront template with cinematic scroll films,<br>
+a playful Three.js cone builder, and six flavours of personality.</p>
+<p><strong>PLAIN HTML / CSS / JS</strong> &nbsp; · &nbsp; <strong>NO BUILD STEP</strong> &nbsp; · &nbsp; <strong>RESPONSIVE</strong></p>
+<p><a href="docs/readme/preview.html#get-started">Get started</a> &nbsp; / &nbsp; <a href="docs/readme/preview.html#the-experience">Explore the experience</a> &nbsp; / &nbsp; <a href="docs/readme/preview.html#make-it-yours">Make it yours</a> &nbsp; / &nbsp; <a href="docs/readme/preview.html#the-library">Read the docs</a></p>
+<p><img src="docs/readme/hero-scroll.gif" alt="Recorded BR-ICE hero: scrolling opens the pink pint, releases its ingredients, reveals labels, and reverses the animation." width="100%"></p>
+<p><sub>Captured from the running website. Scroll-controlled motion, shown here as a looping GIF.</sub></p>
+</div>
+<hr />
+<h2 id="a-storefront-with-a-story">A storefront with a story</h2>
+<p>BR-ICE takes visitors from the first crack of the pint to their own three-scoop creation. Oversized lettering, pastel colour fields, ingredient reveals, and tactile product films give each chapter its own rhythm.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Six flavours</th>
+<th style="text-align: center;">Three scoops</th>
+<th style="text-align: center;">One command</th>
+<th style="text-align: center;">51.25 MB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">A full-screen flavour theatre</td>
+<td style="text-align: center;">An interactive cone, made by you</td>
+<td style="text-align: center;">Start the local preview</td>
+<td style="text-align: center;">Processed website media¹</td>
+</tr>
+</tbody>
+</table>
+<h2 id="get-started">Get started</h2>
+<p>Open a terminal in the project folder. With Node.js installed, run:</p>
+<pre><code class="language-sh">node scripts/serve.mjs
+</code></pre>
+<p>Open <strong><a href="http://127.0.0.1:4173">localhost:4173</a></strong>. That is the whole setup.</p>
+<p>There is no dependency installation or build step for the website. Serve it over HTTP rather than opening <code>index.html</code> directly. The specified animation libraries and Google Fonts load from CDNs and need internet access.</p>
+<details>
+<summary><strong>Another way to preview</strong></summary>
+<p>Any static HTTP server works. For example:</p>
+<pre><code class="language-sh">npx serve .
+</code></pre>
+<p>Use the address printed by that server. The included server binds to <code>127.0.0.1:4173</code>; a local preview is not a public deployment.</p>
+</details>
+<h2 id="the-experience">The experience</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Chapter</th>
+<th style="text-align: left;">What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>01 / Crack the pint</strong></td>
+<td style="text-align: left;">A pinned, reversible video reveal, enormous BR / ICE lettering, instanced sprinkles, and ingredient labels.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>02 / Meet the ingredients</strong></td>
+<td style="text-align: left;">A sugar-cube reveal leads into real-milk storytelling, animated counters, an arched film, and pasture photography.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>03 / Feel the texture</strong></td>
+<td style="text-align: left;">A generous, pinned close-up lets the ice cream do the talking.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>04 / Find your flavour</strong></td>
+<td style="text-align: left;">Six colour-soaked product scenes, wipe transitions, scroll-scrubbed films, and a flavour selector.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>05 / Build your own</strong></td>
+<td style="text-align: left;">Stack up to three scoops, spin a procedural waffle cone, toggle sprinkles, and export your creation.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>06 / Collect the moments</strong></td>
+<td style="text-align: left;">Seven photographs move through a horizontal gallery.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>07 / Fill the freezer</strong></td>
+<td style="text-align: left;">Product cards, five currencies, a persistent bag, and a keyboard-friendly cart dialog.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>08 / Stay for dessert</strong></td>
+<td style="text-align: left;">Floating scoops, newsletter validation, and a final invitation to the brand.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="your-cone-your-rules">Your cone. Your rules.</h2>
+<p><img src="docs/readme/cone-builder.gif" alt="The actual BR-ICE cone builder rotating a strawberry, chocolate, and mango stack alongside the flavour controls." width="100%"></p>
+<p><strong>Choose → Stack → Spin → Snap.</strong> Start with strawberry, add two more scoops, then drag horizontally or use the arrow keys to rotate. The snapshot button exports a <strong>1080 × 1350 PNG</strong> locally.</p>
+<p>The waffle cone, scoop geometry, textures, lighting, and sprinkle meshes are created in Three.js. No external 3D model is needed.</p>
+<details>
+<summary><strong>Prefer still previews? View desktop, mobile, and export examples.</strong></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Desktop shop</th>
+<th style="text-align: center;">Mobile hero</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img src="docs/readme/shop.webp" alt="Desktop shop showing vanilla, chocolate, and mango product cards." width="640"></td>
+<td style="text-align: center;"><img src="docs/readme/mobile.webp" alt="The BR-ICE opening hero on a narrow phone viewport." width="195"></td>
+</tr>
+</tbody>
+</table>
+<p><a href="docs/readme/hero.webp">Opening hero still</a> · <a href="docs/readme/cone-export.webp">Example cone export</a></p>
+</details>
+<h2 id="made-to-move-built-to-settle">Made to move. Built to settle.</h2>
+<p>Motion is part of the experience, with explicit alternatives when it is unwanted or unavailable.</p>
+<ul>
+<li><strong>Reduced motion:</strong> end-frame posters, no pinned sections or video scrubbing, no Lenis, and all six flavours in normal document flow.</li>
+<li><strong>Keyboard controls:</strong> cone rotation with arrow keys; the bag traps focus, closes with Escape, and restores focus to its trigger.</li>
+<li><strong>Considerate rendering:</strong> loops pause offscreen and when the tab is hidden; Three.js renders only while visible, with builder updates driven by changes and animation.</li>
+<li><strong>WebGL fallback:</strong> explanatory messages appear if a browser cannot create the 3D scenes.</li>
+</ul>
+<p>The GIFs in this README are recordings. A Markdown viewer may keep playing them independently of your system's motion preference; the website itself implements the reduced-motion behaviour above.</p>
+<h2 id="make-it-yours">Make it yours</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Change</th>
+<th style="text-align: left;">Edit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Brand wording, chapter copy, and product claims</td>
+<td style="text-align: left;"><a href="index.html"><code>index.html</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Colours, spacing, typography, and responsive layout</td>
+<td style="text-align: left;"><a href="css/style.css"><code>css/style.css</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Flavours, origins, notes, scoop colours, and nutrition</td>
+<td style="text-align: left;"><code>FLAVOURS</code> in <a href="js/main.js"><code>js/main.js</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Fixed prices for USD, EUR, GBP, INR, and JPY</td>
+<td style="text-align: left;"><code>PRICES</code> in <a href="js/main.js"><code>js/main.js</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Cone geometry, textures, lighting, and PNG composition</td>
+<td style="text-align: left;"><a href="js/three-scenes.js"><code>js/three-scenes.js</code></a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Media metadata and sampled stage colours</td>
+<td style="text-align: left;"><a href="media/manifest.json"><code>media/manifest.json</code></a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>One flavour collection, three interfaces.</strong> The theatre, shop, and builder chips use the same <code>FLAVOURS</code> data, so product edits stay consistent.</p>
+<details>
+<summary><strong>The stack, without the scaffolding</strong></summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Layer</th>
+<th style="text-align: left;">Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Structure</td>
+<td style="text-align: left;">Semantic HTML</td>
+</tr>
+<tr>
+<td style="text-align: left;">Styling</td>
+<td style="text-align: left;">CSS tokens and responsive layouts</td>
+</tr>
+<tr>
+<td style="text-align: left;">Scroll and typography</td>
+<td style="text-align: left;">GSAP 3.13.0 · ScrollTrigger · SplitText</td>
+</tr>
+<tr>
+<td style="text-align: left;">Smooth scrolling</td>
+<td style="text-align: left;">Lenis 1.1.13</td>
+</tr>
+<tr>
+<td style="text-align: left;">3D scenes</td>
+<td style="text-align: left;">Three.js 0.170.0 and addons via an import map</td>
+</tr>
+<tr>
+<td style="text-align: left;">Type</td>
+<td style="text-align: left;">Bricolage Grotesque · Instrument Serif · DM Sans</td>
+</tr>
+<tr>
+<td style="text-align: left;">Local state</td>
+<td style="text-align: left;"><code>localStorage</code> for the bag and currency</td>
+</tr>
+<tr>
+<td style="text-align: left;">Local server</td>
+<td style="text-align: left;">Node.js built-in modules</td>
+</tr>
+</tbody>
+</table>
+<p>No frontend framework, bundler, or external 3D-model dependency.</p>
+</details>
+<details>
+<summary><strong>Inside the animation system</strong></summary>
+<p>The loader waits for the fonts and hero clip, with a five-second maximum. Each scrub film is fetched completely into a blob URL before use; sugar and flavour clips then load sequentially in story order.</p>
+<p>Near-viewport clips interpolate toward their target time at <code>0.2</code>, changing playback position only when the difference exceeds <code>8 ms</code> and the video is not already seeking. The last target is bounded to <code>duration − 0.05</code> seconds.</p>
+<p>At page load, viewports of <code>760px</code> or less select the mobile scrub files. Reload when changing device classes during testing. Hero ingredient coordinates are normalised to the source film and mapped into its displayed cover bounds.</p>
+<p>See the <a href="docs/DEVELOPMENT.md">development guide</a> for implementation and replacement-media details.</p>
+</details>
+<details>
+<summary><strong>Replace and process the media</strong></summary>
+<p>Put source downloads in <code>assets/</code>. Update the filename-prefix mappings in the scripts, then run:</p>
+<pre><code class="language-sh">bash scripts/process.sh
+python scripts/process-images.py
+python scripts/verify-media.py
+</code></pre>
+<p>Processing requires Bash, FFmpeg/ffprobe, Python, and Pillow. Set <code>FFMPEG</code> and <code>FFPROBE</code> if the binaries are not on PATH. Source downloads and local development tools are excluded from the release ZIP.</p>
+<p>Scrub files use silent H.264, faststart, no B-frames, and a maximum two-frame keyframe interval. The pipeline creates desktop/mobile variants, posters, shop images, a share image, and sampled background colours. Originals are preserved.</p>
+<p>The supplied films are 720p and some have changing backgrounds. Read the <a href="docs/MEDIA-REPORT.md">media report</a> before replacing them; it documents the source limitations, crop, mark-removal region, and output dimensions. Generation prompts are in the <a href="docs/ASSET_PROMPTS.md">asset prompt library</a>.</p>
+</details>
+<h2 id="the-library">The library</h2>
+<pre><code class="language-text">BR-ICE/
+├── index.html                 The complete storefront
+├── css/style.css              Brand tokens, layout, and motion styles
+├── js/
+│   ├── main.js                Story, products, bag, and interaction
+│   └── three-scenes.js        Sprinkle burst and procedural cone
+├── media/                     Processed films, posters, and photography
+├── scripts/                   Preview server and asset processing
+├── docs/
+│   ├── readme/                Self-contained README previews
+│   ├── DEVELOPMENT.md         Setup and implementation guide
+│   ├── QA.md                  Verification coverage and scope
+│   ├── MEDIA-REPORT.md        Supplied asset details
+│   └── ASSET_PROMPTS.md        Image and video prompt library
+└── README.md                  You are here
+</code></pre>
+<p><a href="docs/DEVELOPMENT.md">Development guide</a> · <a href="docs/QA.md">Verification record</a> · <a href="docs/MEDIA-REPORT.md">Media report</a> · <a href="docs/ORIGINAL-BRIEF.txt">Original brief</a></p>
+<p><a href="docs/BR-ICE_Image_Prompts.pdf">Image prompts PDF</a> · <a href="docs/BR-ICE_Video_Prompts.pdf">Video prompts PDF</a></p>
+<h2 id="checked-with-the-scope-in-view">Checked, with the scope in view</h2>
+<p>Verified in Chrome at <strong>1440 × 900</strong>, <strong>1024 × 768</strong>, and <strong>390 × 844</strong>. Checks cover forward/reverse scrubbing, mobile media selection, the three-scoop limit, PNG export, bag controls, currency changes, modal focus, newsletter validation, reduced motion, and simulated WebGL failure.</p>
+<p>All <strong>19 processed videos</strong> pass the included media verifier. The tested normal flows produced no JavaScript page errors. Safari, Firefox, and physical-device testing have not been performed. Full results: <a href="docs/QA.md">QA.md</a>.</p>
+<h2 id="before-the-first-real-order">Before the first real order</h2>
+<p>The visual storefront and local interactions are implemented. <strong>Checkout and newsletter are integration points</strong>: connect a payment/store service and an email provider before launch. The current handlers clearly explain this, and do not take payments or submit subscriptions.</p>
+<p>Replace illustrative prices, nutrition, product claims, shipping promises, city captions, and policies with verified brand information. Keep service secrets on your backend.</p>
+<hr />
+<div align="center">
+<p><strong>SIX FLAVOURS. ENDLESS GOOD TASTE.</strong></p>
+<p><em>Open the pint. Make it yours.</em></p>
+<p><a href="docs/readme/preview.html#">Back to the top</a> &nbsp; · &nbsp; <a href="docs/readme/preview.html#get-started">Start the preview</a> &nbsp; · &nbsp; <a href="js/main.js">Explore the code</a></p>
+<p><sub>¹ Website media size excludes README previews and documentation. Animated previews are bundled locally; no external badge or GIF service is required.</sub></p>
+</div></main></body></html>

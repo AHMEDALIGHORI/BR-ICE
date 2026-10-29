@@ -1,0 +1,114 @@
+{
+  "clips": {
+    "pint": {
+      "file": "media/scrub/pint.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#e973a7",
+      "endBackground": "#f374b3"
+    },
+    "sugar-cube": {
+      "file": "media/scrub/sugar-cube.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#f37424",
+      "endBackground": "#fa7726"
+    },
+    "vanilla": {
+      "file": "media/scrub/vanilla.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#0d49cc",
+      "endBackground": "#0c4cd1"
+    },
+    "chocolate": {
+      "file": "media/scrub/chocolate.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#f1bb27",
+      "endBackground": "#fac424"
+    },
+    "mango": {
+      "file": "media/scrub/mango.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#1b48d1",
+      "endBackground": "#ae97fd"
+    },
+    "pistachio": {
+      "file": "media/scrub/pistachio.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#2f47ad",
+      "endBackground": "#fb6955"
+    },
+    "strawberry": {
+      "file": "media/scrub/strawberry.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#114bcc",
+      "endBackground": "#7dd9bc"
+    },
+    "caramel": {
+      "file": "media/scrub/caramel.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#00686f",
+      "endBackground": "#02737b"
+    },
+    "milk": {
+      "file": "media/loop/milk.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#2d9ccb",
+      "endBackground": "#2e9dcb"
+    },
+    "scoop-curl": {
+      "file": "media/loop/scoop-curl.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#a39e94",
+      "endBackground": "#afa99b"
+    },
+    "floating": {
+      "file": "media/loop/floating.mp4",
+      "duration": 8.0,
+      "width": 1280,
+      "height": 716,
+      "sourceWidth": 1280,
+      "sourceHeight": 720,
+      "background": "#f1e1c8",
+      "endBackground": "#fdeed2"
+    }
+  }
+}
